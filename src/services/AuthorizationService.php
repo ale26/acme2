@@ -136,10 +136,7 @@ class AuthorizationService
 
         $keyAuthorization = $challenge['token'].'.'.OpenSSLHelper::generateThumbprint();
 
-        while (!$this->verifyLocally($type, $keyAuthorization))
-        {
-            sleep(3);
-        }
+        $this->verifyLocally($type, $keyAuthorization);
 
         $jwk = OpenSSLHelper::generateJWSOfKid(
             $challenge['url'],
@@ -174,7 +171,7 @@ class AuthorizationService
      * @param string $type
      * @param string $keyAuthorization
      * @return bool
-     * @throws \stonemax\acme2\exceptions\RequestException
+     * @throws AuthorizationException
      */
     private function verifyLocally($type, $keyAuthorization)
     {
@@ -185,7 +182,7 @@ class AuthorizationService
         {
             if (!CommonHelper::checkHttpChallenge($domain, $challenge['token'], $keyAuthorization))
             {
-                return FALSE;
+                throw new AuthorizationException("Local HTTP check failed: Please ensure the fail exists and has the correct content");
             }
         }
         else
@@ -194,7 +191,7 @@ class AuthorizationService
 
             if (!CommonHelper::checkDNSChallenge($domain, $dnsContent))
             {
-                return FALSE;
+                throw new AuthorizationException("Local DNS Check failed: Please ensure the txt record exists and has the correct content.");
             }
         }
 

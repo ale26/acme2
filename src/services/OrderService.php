@@ -345,7 +345,7 @@ class OrderService
             throw new OrderException("There are still some authorizations that are not valid.");
         }
 
-        if ($this->status == 'pending')
+        if ($this->status == 'pending' || $this->status == 'ready')
         {
             if (!$csr)
             {
