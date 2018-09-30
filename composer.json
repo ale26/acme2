@@ -1,5 +1,5 @@
 {
-    "name": "stonemax/acme2",
+    "name": "MelonDevelopment/acme2",
     "description": "Another PHP client for acme protocal (version 2) implementation, used for generating letsencrypt's free ssl certificates.",
     "type": "library",
     "license": "MIT",
@@ -7,9 +7,13 @@
         {
             "name": "Zhang Jinlong",
             "email": "466028373@qq.com"
+        },
+        {
+            "name": "Jackson (theminecoder)",
+            "email": "jackson@melondev.co"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {},
     "autoload": {
         "psr-4": {
