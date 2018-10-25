@@ -83,10 +83,9 @@ class Runtime
      * @param array $emailList
      * @param string|StorageProvider $storageProvider
      * @param bool $staging
-     * @param string|null $proxy HTTP-proxy
      * @throws RuntimeException
      */
-    public function __construct($emailList, $storageProvider, $staging = FALSE, $proxy = null)
+    public function __construct($emailList, $storageProvider, $staging = FALSE)
     {
         $this->emailList = array_filter(array_unique($emailList));
         if(is_string($storageProvider)) // Convert fs path to provider
@@ -103,7 +102,6 @@ class Runtime
             throw new RuntimeException("Invalid storage provider passed. Must either be a file system path or an actual StorageProvider");
         }
         $this->staging = boolval($staging);
-        $this->proxy = $proxy;
 
         sort($this->emailList);
     }

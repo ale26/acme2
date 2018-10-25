@@ -10,6 +10,7 @@
 
 namespace stonemax\acme2;
 
+use stonemax\acme2\helpers\RequestHelper;
 use stonemax\acme2\storage\StorageProvider;
 
 /**
@@ -29,13 +30,12 @@ class Client
      * @param array $emailList
      * @param string|StorageProvider $storageProvider
      * @param bool $staging
-     * @param string|null $proxy Use Http-proxy. Example http://proxy-host.com:80
      * @throws exceptions\RuntimeException
      * @throws exceptions\StorageException
      */
-    public function __construct($emailList, $storageProvider, $staging = FALSE, $proxy = null)
+    public function __construct($emailList, $storageProvider, $staging = FALSE)
     {
-        self::$runtime = new Runtime($emailList, $storageProvider, $staging, $proxy);
+        self::$runtime = new Runtime($emailList, $storageProvider, $staging);
 
         self::$runtime->init();
     }
