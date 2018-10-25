@@ -1,5 +1,5 @@
 {
-    "name": "MelonDevelopment/acme2",
+    "name": "firelink/acme2",
     "description": "Another PHP client for acme protocal (version 2) implementation, used for generating letsencrypt's free ssl certificates.",
     "type": "library",
     "license": "MIT",
@@ -11,6 +11,10 @@
         {
             "name": "Jackson (theminecoder)",
             "email": "jackson@melondev.co"
+        },
+        {
+            "name": "AlexS",
+            "email": "lex4sh@gmail.com"
         }
     ],
     "minimum-stability": "dev",
