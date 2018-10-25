@@ -29,12 +29,13 @@ class Client
      * @param array $emailList
      * @param string|StorageProvider $storageProvider
      * @param bool $staging
-     * @throws exceptions\StorageException
+     * @param string|null $proxy Use Http-proxy. Example http://proxy-host.com:80
      * @throws exceptions\RuntimeException
+     * @throws exceptions\StorageException
      */
-    public function __construct($emailList, $storageProvider, $staging = FALSE)
+    public function __construct($emailList, $storageProvider, $staging = FALSE, $proxy = null)
     {
-        self::$runtime = new Runtime($emailList, $storageProvider, $staging);
+        self::$runtime = new Runtime($emailList, $storageProvider, $staging, $proxy);
 
         self::$runtime->init();
     }

@@ -20,6 +20,8 @@ use stonemax\acme2\exceptions\RequestException;
  */
 class RequestHelper
 {
+    private static $proxyServer;
+
     /**
      * Make http GET request
      * @param string $url
@@ -128,6 +130,10 @@ class RequestHelper
         curl_setopt($handler, CURLOPT_HEADER, TRUE);
         curl_setopt($handler, CURLOPT_RETURNTRANSFER, TRUE);
 
+        if (self::$proxyServer) {
+            curl_setopt($handler, CURLOPT_PROXY, self::$proxyServer);
+        }
+
         switch ($requestType)
         {
             case CommonConstant::REQUEST_TYPE_GET:
@@ -150,5 +156,14 @@ class RequestHelper
         }
 
         return $handler;
+    }
+
+    /**
+     * Set proxy server or null for disable proxy
+     * @param $proxy
+     */
+    public static function setProxy($proxy)
+    {
+        self::$proxyServer = $proxy;
     }
 }
