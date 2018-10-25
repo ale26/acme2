@@ -24,8 +24,8 @@ use stonemax\acme2\storage\StorageProvider;
 class AccountService
 {
 
-    const PRIVATE_KEY_PATH = DIRECTORY_SEPARATOR. "private.pem";
-    const PUBLIC_KEY_PATH = DIRECTORY_SEPARATOR. "public.pem";
+    const PRIVATE_KEY_PATH = "private.pem";
+    const PUBLIC_KEY_PATH = "public.pem";
 
     /**
      * Account id

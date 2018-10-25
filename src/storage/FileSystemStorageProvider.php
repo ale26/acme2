@@ -19,15 +19,18 @@ class FileSystemStorageProvider extends StorageProvider
      */
     public function __construct($baseDir)
     {
-        $this->baseDir = $baseDir;
-        if (
-            !is_dir($baseDir) && (
-                mkdir($baseDir, 0755, TRUE) === FALSE ||
-                mkdir($baseDir . FileSystemStorageProvider::ACCOUNT_DIR, 0755, TRUE) === FALSE ||
-                mkdir($baseDir . FileSystemStorageProvider::DOMAIN_DIR, 0755, TRUE) === FALSE
-            )
-        ) {
-            throw new StorageException("create directory({$baseDir}) failed, please check the permission.");
+        $this->baseDir = rtrim($baseDir, DIRECTORY_SEPARATOR);
+
+        $directories = [
+            $baseDir,
+            $baseDir . FileSystemStorageProvider::ACCOUNT_DIR,
+            $baseDir . FileSystemStorageProvider::DOMAIN_DIR,
+        ];
+        foreach ($directories as $directory) {
+            if (!is_dir($directory) && (mkdir($directory, 0755, TRUE) === FALSE))
+            {
+                throw new StorageException("create directory({$directory}) failed, please check the permission.");
+            }
         }
     }
 
